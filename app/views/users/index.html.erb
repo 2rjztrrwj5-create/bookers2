@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <%= render "shared/sidebar", sidebar_user: Current.user %>
+
+    <div class="col-md-8 offset-md-1">
+      <h1>Users</h1>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |u| %>
+            <tr>
+              <td>
+                <%= link_to user_path(u) do %>
+                  <% if u.profile_image.attached? %>
+                    <%= image_tag u.profile_image, style: "width:40px; height:40px; object-fit:cover; border-radius:50%;" %>
+                  <% else %>
+                    <%= image_tag "default-image.svg", style: "width:40px; height:40px; object-fit:cover; border-radius:50%;" %>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= u.name %></td>
+              <td><%= link_to "Show", user_path(u), class: "btn btn-outline-secondary btn-sm" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

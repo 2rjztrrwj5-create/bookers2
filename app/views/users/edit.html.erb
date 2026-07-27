@@ -1,0 +1,36 @@
+<div class="container mt-4" style="max-width: 500px;">
+  <h1>Edit profile</h1>
+
+  <%= form_with model: @user do |f| %>
+    <% if @user.errors.any? %>
+      <div class="alert alert-danger">
+        <ul class="mb-0">
+          <% @user.errors.full_messages.each do |msg| %>
+            <li>error: <%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= f.label :profile_image, "Profile image" %>
+      <%= f.file_field :profile_image, class: "form-control" %>
+    </div>
+
+    <% if @user.profile_image.attached? %>
+      <%= image_tag @user.profile_image, style: "width:100px; height:100px; object-fit:cover;" %>
+    <% end %>
+
+    <div class="mb-3">
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :introduction, "Introduction" %>
+      <%= f.text_area :introduction, class: "form-control", rows: 3 %>
+    </div>
+
+    <%= f.submit "Update User", class: "btn btn-primary" %>
+  <% end %>
+</div>

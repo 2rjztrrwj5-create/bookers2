@@ -1,0 +1,23 @@
+<%= form_with model: book do |f| %>
+  <% if book.errors.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+        <% book.errors.full_messages.each do |msg| %>
+          <li>error: <%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :title, "Title" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :body, "Opinion" %>
+    <%= f.text_area :body, class: "form-control", rows: 4 %>
+  </div>
+
+  <%= f.submit class: "btn btn-success" %>
+<% end %>
