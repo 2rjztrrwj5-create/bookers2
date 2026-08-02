@@ -10,7 +10,9 @@
             <th></th>
             <th>Title</th>
             <th>Opinion</th>
-            <th colspan="2"></th>
+            <th colspan="3"></th>
+            <th>いいね</th>
+            <th>コメント</th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +31,15 @@
                   <%= link_to "Destroy", book_path(b), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" %>
                 <% end %>
               </td>
+              <td>
+                <% if Current.user.favorites.exists?(book_id: b.id) %>
+                  <%= link_to "外す", favorite_path(Current.user.favorites.find_by(book_id: b.id).id), data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-sm" %>
+                <% else %>
+                  <%= link_to "いいね", favorites_path(book_id: b.id), data: { turbo_method: :post }, class: "btn btn-outline-danger btn-sm" %>
+                <% end %>
+              </td>
+              <td><%= b.favorites.count %></td>
+              <td><%= b.book_comments.count %></td>
             </tr>
           <% end %>
         </tbody>
