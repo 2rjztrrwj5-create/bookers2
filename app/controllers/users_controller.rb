@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: %i[new create]
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update following followers]
   before_action :ensure_correct_user, only: %i[edit update]
 
   def index
@@ -33,6 +33,14 @@ class UsersController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def following
+    @users = @user.following
+  end
+
+  def followers
+    @users = @user.followers
   end
 
   private
