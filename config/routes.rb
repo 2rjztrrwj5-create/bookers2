@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root "static_pages#top"
   get "home/about" => "static_pages#about", as: :about
   get "users/sign_up" => "users#new", as: :new_user
+  get "search" => "searches#search", as: :search
   
   resources :users, only: %i[index create show edit update] do
     member do

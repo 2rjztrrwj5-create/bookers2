@@ -1,0 +1,6 @@
+<%= form_with url: search_path, method: :get do |f| %>
+  <%= f.text_field :keyword %>
+  <%= f.select :target, [["ユーザー", "user"], ["投稿", "book"]] %>
+  <%= f.select :method, [["完全一致", "perfect"], ["前方一致", "forward"], ["後方一致", "backward"], ["部分一致", "partial"]] %>
+  <%= f.submit "検索", class: "btn btn-success" %>
+<% end %>

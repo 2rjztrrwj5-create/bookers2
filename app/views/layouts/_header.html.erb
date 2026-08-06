@@ -57,3 +57,6 @@
     </div>
   </nav>
 </header>
+<% if authenticated? %>
+  <%= render "shared/search_form" %>
+<% end %>
