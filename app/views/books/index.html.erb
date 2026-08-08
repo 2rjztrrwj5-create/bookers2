@@ -32,13 +32,19 @@
                 <% end %>
               </td>
               <td>
-                <% if Current.user.favorites.exists?(book_id: b.id) %>
-                  <%= link_to "外す", favorite_path(Current.user.favorites.find_by(book_id: b.id).id), data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-sm" %>
-                <% else %>
-                  <%= link_to "いいね", favorites_path(book_id: b.id), data: { turbo_method: :post }, class: "btn btn-outline-danger btn-sm" %>
+                <%= turbo_frame_tag "favorite_#{b.id}" do %>
+                  <% if Current.user.favorites.exists?(book_id: b.id) %>
+                    <%= link_to "外す", favorite_path(Current.user.favorites.find_by(book_id: b.id).id), data: { turbo_method: :delete }, class: "btn btn-outline-danger btn-sm" %>
+                  <% else %>
+                    <%= link_to "いいね", favorites_path(book_id: b.id), data: { turbo_method: :post }, class: "btn btn-outline-danger btn-sm" %>
+                  <% end %>
                 <% end %>
               </td>
-              <td><%= b.favorites.count %></td>
+              <td>
+                <%= turbo_frame_tag "favorite_count_#{b.id}" do %>
+                  <%= b.favorites.count %>
+                <% end %>
+              </td>
               <td><%= b.book_comments.count %></td>
             </tr>
           <% end %>

@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "favorite_#{@favorite.book.id}" do %>
+  <%= turbo_frame_tag "favorite_#{@favorite.book.id}" do %>
+    <%= link_to "いいね", favorites_path(book_id: @favorite.book.id), data: { turbo_method: :post }, class: "btn btn-outline-danger btn-sm" %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "favorite_count_#{@favorite.book.id}" do %>
+  <%= turbo_frame_tag "favorite_count_#{@favorite.book.id}" do %>
+    <%= @favorite.book.favorites.count %>
+  <% end %>
+<% end %>
